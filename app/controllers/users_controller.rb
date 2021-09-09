@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render component: 'User', props: { user: @user, courses: @user.courses }
+    render component: 'User', props: { user: @user, courses: @user.courses, full_name: @user.full_name }
   end
 
   def new
@@ -44,6 +44,10 @@ class UsersController < ApplicationController
   end
 
   private
+    def set_user
+      @user = User.find(params[:id])
+    end
+
     def user_params
       params.require(:user).permit(:first_name, :last_name)
     end
