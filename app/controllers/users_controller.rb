@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render component: 'User', props: { user: @user }
+    render component: 'User', props: { user: @user, courses: @user.courses }
   end
 
   def new
