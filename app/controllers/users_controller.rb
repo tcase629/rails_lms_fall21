@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  
   def index
     @users = User.all
     render component: 'Users', props: { users: @users }
   end
 
   def show
-    @user = User.find(params[:id])
-    render component: 'User', props: { user: @user, courses: @user.courses, full_name: @user.full_name }
+    render component: 'User', props: { user: @user, courses: @user.courses, fullName: @user.full_name }
   end
 
   def new
@@ -17,30 +18,27 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path
+      redirect_to @user
     else
       render component: 'UserNew', props: { user: @user }
+    end
   end
 
   def edit
-    @user = User.find(params[:id])
     render component: 'UserEdit', props: { user: @user }
   end
 
   def update
-    @user = User.find(params[:id])
-    if
-      @user.update(user_params)
-      redirect_to root_path
+    if @user.update(user_params)
+      redirect_to @user
     else
       render component: 'UserEdit', props: { user: @user }
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
-    redirect_to root_path
+    redirect_to users_path
   end
 
   private
