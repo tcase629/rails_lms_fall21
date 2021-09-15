@@ -1,13 +1,14 @@
 import React from 'react'
 
-const User = ({ user, courses, full_name }) => {
+const User = ({ user, courses, fullName }) => {
   const { id } = user;
   return (
     <>
       <div className="user-card">
-        <h1>{full_name}</h1>
+        <h1>{fullName}</h1>
         <hr />
-        <h6>Courses</h6>
+        <h5>Courses</h5>
+        <h6>{courses.length <= 0 ? "No Courses" : ""}</h6>
         <ul>
           { courses.map((course) => (
             <li>

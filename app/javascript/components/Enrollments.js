@@ -14,7 +14,7 @@ const Enrollments = ({ course, teachers, tas, students, users }) => {
 
   return (
     <>
-      <h1>{course.name}</h1>
+      <h1>{course.course_name}'s Enrollments</h1>
       <a href={`/courses/${course.id}/enrollments/new`}>Add Enrollment</a>
       <br />
       <h2>Teachers</h2> 
@@ -22,7 +22,7 @@ const Enrollments = ({ course, teachers, tas, students, users }) => {
         <div>
           <p>{displayUser(t.user_id)}</p>
           <a href={`/courses/${course.id}/enrollments/${t.id}`} data-method="delete">
-            delete
+            Delete
           </a>
         </div>
       ))}
@@ -31,7 +31,7 @@ const Enrollments = ({ course, teachers, tas, students, users }) => {
         <div>
           <p>{displayUser(ta.user_id)}</p>
           <a href={`/courses/${course.id}/enrollments/${ta.id}`} data-method="delete">
-            delete
+            Delete
           </a>
         </div>
       ))}
@@ -40,7 +40,7 @@ const Enrollments = ({ course, teachers, tas, students, users }) => {
         <div>
           <p>{displayUser(s.user_id)}</p>
           <a href={`/courses/${course.id}/enrollments/${s.id}`} data-method="delete">
-            delete
+            Delete
           </a>
         </div>
       ))}

@@ -5,7 +5,7 @@ class EnrollmentsController < ApplicationController
     @teachers = @course.enrollments.where(role: 'teacher')
     @tas = @course.enrollments.where(role: 'ta')
     @students = @course.enrollments.where(role: 'student')
-    render component: "Enrollments", props: { course: @course, teachers: @teachers, tas: @tas, students: @students }
+    render component: "Enrollments", props: { course: @course, teachers: @teachers, tas: @tas, students: @students, users: User.all }
   end
 
   def new
@@ -16,10 +16,11 @@ class EnrollmentsController < ApplicationController
 
   def create
     @enrollment = @course.enrollments.new(enrollment_params)
+    @users = User.all - @course.users
     if @enrollment.save
       redirect_to course_enrollments_path(@course)
     else
-      render :new
+      render component: "EnrollmentNew", props: { course: @course, enrollment: @enrollment, users: @users }
     end
   end
 
